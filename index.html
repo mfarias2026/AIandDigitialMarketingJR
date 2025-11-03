@@ -7,7 +7,7 @@
   <title>Taylor Swift Album Rankings</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: "Comic Sans MS", sans-serif;
       background: linear-gradient(to bottom right, #f9d5ec, #fce1f0);
       color: #333;
       text-align: center;
@@ -19,51 +19,139 @@
       background-color: #e8a6c9;
       padding: 20px;
       color: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
 
     h1 {
       margin: 0;
+      font-size: 2em;
     }
 
     ol {
       list-style: none;
       padding: 0;
-      max-width: 500px;
+      max-width: 700px;
       margin: 30px auto;
     }
 
     li {
       background-color: white;
-      margin: 10px 0;
+      margin: 15px 0;
       padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       font-size: 1.2em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: transform 0.2s;
     }
 
-    li span.rank {
+    li:hover {
+      transform: scale(1.03);
+    }
+
+    .album-cover {
+      width: 60px;
+      height: 60px;
+      border-radius: 10px;
+      margin-right: 15px;
+      flex-shrink: 0;
+    }
+
+    .album-info {
+      flex-grow: 1;
+      text-align: left;
+    }
+
+    .rank {
       font-weight: bold;
       color: #d16ba5;
+      margin-right: 10px;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: #fff0f6;
+      padding: 20px;
+      border-radius: 15px;
+      width: 80%;
+      max-width: 500px;
+      text-align: left;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      animation: pop 0.3s ease;
+      max-height: 80%;
+      overflow-y: auto;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .close {
+      float: right;
+      font-size: 1.5em;
+      cursor: pointer;
+      color: #d16ba5;
+    }
+
+    .songs {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    .popular-song {
+      background-color: #f9d5ec;
+      padding: 10px;
+      border-radius: 10px;
+      margin-top: 10px;
+      font-weight: bold;
+      color: #a64ca6;
     }
   </style>
 </head>
 <body>
   <header>
     <h1>Taylor Swift Album Rankings</h1>
-    <p>From most popular to least popular</p>
+    <p>Click an album to learn more!</p>
   </header>
 
-  <ol>
-    <li><span class="rank">1.</span> 1989 (Taylor’s Version)</li>
-    <li><span class="rank">2.</span> Midnights</li>
-    <li><span class="rank">3.</span> Folklore</li>
-    <li><span class="rank">4.</span> Lover</li>
-    <li><span class="rank">5.</span> Red (Taylor’s Version)</li>
-    <li><span class="rank">6.</span> Evermore</li>
-    <li><span class="rank">7.</span> Speak Now (Taylor’s Version)</li>
-    <li><span class="rank">8.</span> Fearless (Taylor’s Version)</li>
-    <li><span class="rank">9.</span> Reputation</li>
-    <li><span class="rank">10.</span> Taylor Swift (Debut)</li>
-  </ol>
-</body>
-</html>
+  <ol id="albumList"></ol>
+
+  <div id="albumModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+      <h2 id="albumTitle"></h2>
+      <p id="albumDescription"></p>
+      <ul id="albumSongs" class="songs"></ul>
+      <div id="popularSong" class="popular-song"></div>
+    </div>
+  </div>
+
+  <script>
+    const albums = [
+      {
+        rank: 1,
+        name: "1989 (Taylor’s Version)",
+        color: "#a3d5ff",
+        description: "A bright pop album full of catchy tunes and city lights.",
+        songs: [
+          "Welcome to New York", "Blank Space", "Style", "Out of the Woods",
+          "All You Had to Do Was Stay", "Shake It Off", "I Wish You Would",
+          "Bad Blood", "Wildest Dreams", "How You Get the Girl",
+          "This Love", "I Know Places", "

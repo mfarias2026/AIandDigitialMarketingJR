@@ -94,8 +94,6 @@
       text-align: left;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       animation: pop 0.3s ease;
-      max-height: 80%;
-      overflow-y: auto;
     }
 
     @keyframes pop {
@@ -150,8 +148,81 @@
         name: "1989 (Taylor’s Version)",
         color: "#a3d5ff",
         description: "A bright pop album full of catchy tunes and city lights.",
-        songs: [
-          "Welcome to New York", "Blank Space", "Style", "Out of the Woods",
-          "All You Had to Do Was Stay", "Shake It Off", "I Wish You Would",
-          "Bad Blood", "Wildest Dreams", "How You Get the Girl",
-          "This Love", "I Know Places", "
+        songs: ["Welcome to New York", "Blank Space", "Style", "Out of the Woods"],
+        popular: "Blank Space"
+      },
+      {
+        rank: 2,
+        name: "Midnights",
+        color: "#cbb2fe",
+        description: "A dreamy, late-night album about reflection and self-discovery.",
+        songs: ["Lavender Haze", "Maroon", "Anti-Hero", "Bejeweled"],
+        popular: "Anti-Hero"
+      },
+      {
+        rank: 3,
+        name: "Folklore",
+        color: "#d3d3d3",
+        description: "A soft, storytelling album with cozy, cottagecore vibes.",
+        songs: ["The 1", "Cardigan", "Exile", "Betty"],
+        popular: "Cardigan"
+      },
+      {
+        rank: 4,
+        name: "Lover",
+        color: "#f9b3d1",
+        description: "A colorful and romantic album celebrating love in all forms.",
+        songs: ["Lover", "The Man", "You Need to Calm Down", "Cruel Summer"],
+        popular: "Lover"
+      },
+      {
+        rank: 5,
+        name: "Red (Taylor’s Version)",
+        color: "#ff9999",
+        description: "An emotional rollercoaster of heartbreak and healing.",
+        songs: ["State of Grace", "Red", "All Too Well", "22"],
+        popular: "All Too Well"
+      }
+    ];
+
+    const albumList = document.getElementById("albumList");
+    const modal = document.getElementById("albumModal");
+    const closeModal = document.getElementById("closeModal");
+    const albumTitle = document.getElementById("albumTitle");
+    const albumDescription = document.getElementById("albumDescription");
+    const albumSongs = document.getElementById("albumSongs");
+    const popularSong = document.getElementById("popularSong");
+
+    albums.forEach(album => {
+      const li = document.createElement("li");
+      const cover = document.createElement("div");
+      cover.className = "album-cover";
+      cover.style.backgroundColor = album.color;
+
+      const info = document.createElement("div");
+      info.className = "album-info";
+      info.innerHTML = `<span class="rank">${album.rank}.</span> ${album.name}`;
+
+      li.appendChild(cover);
+      li.appendChild(info);
+      albumList.appendChild(li);
+
+      li.addEventListener("click", () => {
+        albumTitle.textContent = album.name;
+        albumDescription.textContent = album.description;
+        albumSongs.innerHTML = "";
+        album.songs.forEach(song => {
+          const liSong = document.createElement("li");
+          liSong.textContent = song;
+          albumSongs.appendChild(liSong);
+        });
+        popularSong.textContent = "Most Popular Song: " + album.popular;
+        modal.style.display = "flex";
+      });
+    });
+
+    closeModal.onclick = () => modal.style.display = "none";
+    window.onclick = (e) => { if (e.target == modal) modal.style.display = "none"; };
+  </script>
+</body>
+</html>

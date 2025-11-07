@@ -1,228 +1,161 @@
-<!-- file: index.html -->
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Taylor Swift Album Rankings</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Micah Solomon La’akea Farias — Resume</title>
+  <meta name="description" content="Resume / CV website for Micah Solomon La’akea Farias" />
   <style>
-    body {
-      font-family: "Comic Sans MS", sans-serif;
-      background: linear-gradient(to bottom right, #f9d5ec, #fce1f0);
-      color: #333;
-      text-align: center;
-      margin: 0;
-      padding: 0;
+    :root{
+      --bg: #0f1724; --card:#0f1724; --muted:#9aa4b2; --accent:#1e90ff; --paper:#fff;
+      --max-width:900px;
+      color-scheme: light dark;
+    }
+    html,body{height:100%;margin:0;font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background: linear-gradient(180deg,#f7fafc 0%, #fff 40%);}
+    .wrap{max-width:var(--max-width);margin:28px auto;padding:24px;}
+
+    header{display:flex;gap:20px;align-items:center}
+    .avatar{width:96px;height:96px;border-radius:12px;background:linear-gradient(135deg,#e6eefc,#fef3c7);display:flex;align-items:center;justify-content:center;font-weight:700;color:#0b1220}
+    h1{margin:0;font-size:1.6rem}
+    .subtitle{margin:0;color:var(--muted);font-size:0.95rem}
+
+    .top-row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:18px}
+    .contact{display:flex;gap:12px;align-items:center;color:#0b1220}
+    .card{background: #ffffff;border-radius:12px;padding:18px;box-shadow:0 8px 20px rgba(12,24,40,0.06)}
+
+    main{display:grid;grid-template-columns:1fr;gap:18px;margin-top:18px}
+    section{display:block}
+    section h2{margin:0 0 8px 0;font-size:1.05rem}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+    ul{margin:0;padding-left:1.15rem}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:#eef6ff;font-size:0.85rem}
+
+    /* Skills list */
+    .skills{display:flex;flex-wrap:wrap;gap:8px}
+
+    /* Responsive */
+    @media (max-width:780px){.two-col{grid-template-columns:1fr}}
+
+    /* Print-friendly */
+    @media print{
+      body{background:white}
+      .wrap{box-shadow:none;margin:0;padding:0}
+      header .avatar{display:none}
     }
 
-    header {
-      background-color: #e8a6c9;
-      padding: 20px;
-      color: white;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 2em;
-    }
-
-    ol {
-      list-style: none;
-      padding: 0;
-      max-width: 700px;
-      margin: 30px auto;
-    }
-
-    li {
-      background-color: white;
-      margin: 15px 0;
-      padding: 15px;
-      border-radius: 15px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      font-size: 1.2em;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    li:hover {
-      transform: scale(1.03);
-    }
-
-    .album-cover {
-      width: 60px;
-      height: 60px;
-      border-radius: 10px;
-      margin-right: 15px;
-      flex-shrink: 0;
-    }
-
-    .album-info {
-      flex-grow: 1;
-      text-align: left;
-    }
-
-    .rank {
-      font-weight: bold;
-      color: #d16ba5;
-      margin-right: 10px;
-    }
-
-    /* Modal styles */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 10;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.6);
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-content {
-      background-color: #fff0f6;
-      padding: 20px;
-      border-radius: 15px;
-      width: 80%;
-      max-width: 500px;
-      text-align: left;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      animation: pop 0.3s ease;
-    }
-
-    @keyframes pop {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    .close {
-      float: right;
-      font-size: 1.5em;
-      cursor: pointer;
-      color: #d16ba5;
-    }
-
-    .songs {
-      margin-top: 10px;
-      padding-left: 20px;
-    }
-
-    .popular-song {
-      background-color: #f9d5ec;
-      padding: 10px;
-      border-radius: 10px;
-      margin-top: 10px;
-      font-weight: bold;
-      color: #a64ca6;
-    }
+    /* small utilities */
+    .muted{color:var(--muted)}
+    .small{font-size:0.9rem}
+    .mt{margin-top:10px}
+    .center{display:flex;gap:8px;align-items:center}
+    .btn{display:inline-block;padding:8px 14px;border-radius:10px;background:var(--accent);color:white;text-decoration:none;font-weight:600}
   </style>
 </head>
 <body>
-  <header>
-    <h1>Taylor Swift Album Rankings</h1>
-    <p>Click an album to learn more!</p>
-  </header>
+  <div class="wrap">
+    <header>
+      <div class="avatar">MS</div>
+      <div style="flex:1">
+        <h1>Micah Solomon La’akea Farias</h1>
+        <p class="subtitle">High school student • Seeking part-time opportunities • Expected Graduation: May 2026</p>
+        <div class="top-row">
+          <div class="card" style="flex:1;min-width:220px">
+            <div class="contact small">
+              <div><strong>Address:</strong>&nbsp;Makakilo Drive, Kapolei</div>
+            </div>
+            <div class="contact small mt">
+              <div><strong>Phone:</strong>&nbsp;808-387-6872</div>
+            </div>
+            <div class="contact small mt">
+              <div><strong>Email:</strong>&nbsp;<a href="mailto:mfarias@hanalani.org">mfarias@hanalani.org</a></div>
+            </div>
+            <div class="contact small mt">
+              <div><strong>LinkedIn:</strong>&nbsp;<span class="muted">(optional)</span></div>
+            </div>
+          </div>
 
-  <ol id="albumList"></ol>
+          <div style="min-width:220px;display:flex;flex-direction:column;gap:8px">
+            <a class="btn" href="#contact">Contact / Call</a>
+            <a class="btn" style="background:#374151;text-decoration:none" href="#download" onclick="window.print();return false">Print / Save PDF</a>
+          </div>
+        </div>
+      </div>
+    </header>
 
-  <div id="albumModal" class="modal">
-    <div class="modal-content">
-      <span class="close" id="closeModal">&times;</span>
-      <h2 id="albumTitle"></h2>
-      <p id="albumDescription"></p>
-      <ul id="albumSongs" class="songs"></ul>
-      <div id="popularSong" class="popular-song"></div>
-    </div>
+    <main>
+      <section class="card">
+        <h2>Objective</h2>
+        <p class="small">A motivated high school student seeking a part-time position to develop professional skills and contribute to a positive team environment. Eager to apply strong communication, problem-solving, and teamwork skills and a commitment to excellence.</p>
+      </section>
+
+      <div class="two-col">
+        <section class="card">
+          <h2>Education</h2>
+          <p class="small"><strong>Hanalani Schools</strong> — Mililani, Hawaii<br>
+          <span class="muted">Expected Graduation:</span> May 2026<br>
+          <span class="muted">Relevant Courses:</span> Computer Science, Marketing, English, AP U.S. History<br>
+          <span class="muted">GPA:</span> (add if 3.0 or higher)</p>
+
+          <h3 class="mt">Skills</h3>
+          <div class="skills mt">
+            <span class="pill">Google Workspace</span>
+            <span class="pill">Written &amp; Verbal Communication</span>
+            <span class="pill">Time Management</span>
+            <span class="pill">Organization</span>
+            <span class="pill">Python (basic)</span>
+            <span class="pill">Canva</span>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Extracurricular Activities</h2>
+          <ul class="small">
+            <li><strong>Model United Nations</strong> — President / Founder (2 years active)</li>
+            <li><strong>Sporter Air Riflery</strong> — Shooter (3 years active)</li>
+          </ul>
+
+          <h3 class="mt">Awards & Honors</h3>
+          <ul class="small">
+            <li>International Thespian, 2025</li>
+          </ul>
+
+          <h3 class="mt">References</h3>
+          <p class="small muted">Available upon request.</p>
+        </section>
+      </div>
+
+      <section class="card" id="contact">
+        <h2>Contact</h2>
+        <p class="small">If you'd like to reach out, email me at <a href="mailto:mfarias@hanalani.org">mfarias@hanalani.org</a> or call <strong>808-387-6872</strong>. References available on request.</p>
+      </section>
+
+      <section class="card" id="download">
+        <h2>Notes & How to use</h2>
+        <ul class="small">
+          <li>To edit: open this file in any text editor and replace placeholder values like GPA, LinkedIn URL, and address.</li>
+          <li>To host: upload this single <code>index.html</code> file to GitHub Pages, Netlify, Vercel, or any static web host.</li>
+          <li>To save as PDF: click "Print / Save PDF" (or use browser Print and choose Save as PDF).</li>
+        </ul>
+      </section>
+
+    </main>
+
+    <footer style="margin-top:18px;text-align:center;color:var(--muted);font-size:0.95rem">Made with ❤️ — Resume generated from a document you uploaded. Customize fonts, colors, and layout as you like.</footer>
   </div>
 
   <script>
-    const albums = [
-      {
-        rank: 1,
-        name: "1989 (Taylor’s Version)",
-        color: "#a3d5ff",
-        description: "A bright pop album full of catchy tunes and city lights.",
-        songs: ["Welcome to New York", "Blank Space", "Style", "Out of the Woods"],
-        popular: "Blank Space"
-      },
-      {
-        rank: 2,
-        name: "Midnights",
-        color: "#cbb2fe",
-        description: "A dreamy, late-night album about reflection and self-discovery.",
-        songs: ["Lavender Haze", "Maroon", "Anti-Hero", "Bejeweled"],
-        popular: "Anti-Hero"
-      },
-      {
-        rank: 3,
-        name: "Folklore",
-        color: "#d3d3d3",
-        description: "A soft, storytelling album with cozy, cottagecore vibes.",
-        songs: ["The 1", "Cardigan", "Exile", "Betty"],
-        popular: "Cardigan"
-      },
-      {
-        rank: 4,
-        name: "Lover",
-        color: "#f9b3d1",
-        description: "A colorful and romantic album celebrating love in all forms.",
-        songs: ["Lover", "The Man", "You Need to Calm Down", "Cruel Summer"],
-        popular: "Lover"
-      },
-      {
-        rank: 5,
-        name: "Red (Taylor’s Version)",
-        color: "#ff9999",
-        description: "An emotional rollercoaster of heartbreak and healing.",
-        songs: ["State of Grace", "Red", "All Too Well", "22"],
-        popular: "All Too Well"
-      }
-    ];
-
-    const albumList = document.getElementById("albumList");
-    const modal = document.getElementById("albumModal");
-    const closeModal = document.getElementById("closeModal");
-    const albumTitle = document.getElementById("albumTitle");
-    const albumDescription = document.getElementById("albumDescription");
-    const albumSongs = document.getElementById("albumSongs");
-    const popularSong = document.getElementById("popularSong");
-
-    albums.forEach(album => {
-      const li = document.createElement("li");
-      const cover = document.createElement("div");
-      cover.className = "album-cover";
-      cover.style.backgroundColor = album.color;
-
-      const info = document.createElement("div");
-      info.className = "album-info";
-      info.innerHTML = `<span class="rank">${album.rank}.</span> ${album.name}`;
-
-      li.appendChild(cover);
-      li.appendChild(info);
-      albumList.appendChild(li);
-
-      li.addEventListener("click", () => {
-        albumTitle.textContent = album.name;
-        albumDescription.textContent = album.description;
-        albumSongs.innerHTML = "";
-        album.songs.forEach(song => {
-          const liSong = document.createElement("li");
-          liSong.textContent = song;
-          albumSongs.appendChild(liSong);
+    // Small JS placeholder — can be expanded to support theme toggle, link copy, or dynamic data loading
+    (function(){
+      // Example: smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', function(e){
+          const target = document.querySelector(this.getAttribute('href'));
+          if(target){e.preventDefault(); target.scrollIntoView({behavior:'smooth',block:'start'});} 
         });
-        popularSong.textContent = "Most Popular Song: " + album.popular;
-        modal.style.display = "flex";
       });
-    });
-
-    closeModal.onclick = () => modal.style.display = "none";
-    window.onclick = (e) => { if (e.target == modal) modal.style.display = "none"; };
+    })();
   </script>
 </body>
 </html>
+
